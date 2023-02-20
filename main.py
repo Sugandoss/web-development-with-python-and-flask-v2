@@ -14,8 +14,8 @@
 #Lesson 2 - Flask Templates and Cloud Deployment
 #Step 3 - Dynamic Data & Cloud Deployment
 #1. Render dynamic data using Jinja template tags
-
-from flask import Flask, render_template
+#2. Add an API route to return JSON using jsonify
+from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
 
@@ -42,11 +42,18 @@ open_positions = [{
 
 
 @app.route('/')
-def hello_world():
+def jovian_careers():
   #return "hello world"
   return render_template("home.html",
                          openpositions=open_positions,
                          company_name="Jovian")
+
+
+# The above jovian_careers() function returns a html page
+# If we want a json or api format, we can use jsonify
+@app.route('/api/openpositions')
+def json_format_jovian_careers():
+  return jsonify(open_positions)
 
 
 if __name__ == '__main__':

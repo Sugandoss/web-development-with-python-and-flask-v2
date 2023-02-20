@@ -1,0 +1,24 @@
+<!--DOCTYPE html-->
+<!--Lesson 2: Step 3: Render dynamic data using Jinja template tags -->
+
+<div class="row border-bottom" style="margin-bottom:16px; padding-bottom:8px;">
+    <div class="col-9"> <!--Give more space for the open positions -->
+      <h4 style="color:rgb(120,120,120); margin-bottom:4px;">
+        {{openposition['title']}}
+      </h4>
+      
+      <div><b>Location: </b>
+        {{openposition['location']}}
+      </div>
+      
+      {% if 'salary' in openposition %}
+        <div><b>Salary: </b>
+          {{openposition['salary']}}
+        </div>
+      {% endif %}
+    </div>
+  
+    <div class="col-3">
+      <button type="button" class="btn btn-outline-primary">Apply</button>
+    </div>
+</div>

@@ -16,10 +16,19 @@
     </style>
   </head>
   <body>
+    {% include 'navbar.html' %}
     <div class=container>
+        
     <h1 class="text-center mt-2 mb-4">About {{company_name}}</h1>
-    <img src="https://unsplash.com/photos/n_L9OtmRhUM" class="img-fluid" id="banner">
-    <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+    <img src="/static/jovian_project.jpg" class="img-fluid" id="banner">
+    <div class="row">
+    <div class="col-md-6 mt-2 mb-4">
+          <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+    </div>
+      <div class="col-3">
+        <img src="/static/people.jpg" class="d-none d-md-block col-md-6 mt-2 mb-4" style="height:200px; width:800px;">
+      </div>
+    </div>
     <h2 class="text-center  mt-2 mb-4"> Open Positions</h2>
       <!--<p>{{positions}}</p>-->
       <!-- instead of giving {{positions}}, we can give for loop like this -->
@@ -30,9 +39,10 @@
       </div>
     <!--<p class="lead">TODO- Show the Job positions here</p>-->
     <div class="text-center">
-    <button class="btn btn-primary btn-lg">Contact Us</button>
+    <a href="mailto:suganya.au@gmail.com?subject=Questions%20about%20Career%20Openings&body=%3CAsk%20your%20questions%20here%3E" class="btn btn-primary btn-lg">Contact Us</a>
     </div>
       <p class="text-center mt-4"> Copyright 2023-Jovian</p>
     </div>
+    {% include 'footer.html' %}
   </body>
 </html>

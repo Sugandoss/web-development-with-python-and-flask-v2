@@ -1,9 +1,9 @@
 import sqlalchemy
 from sqlalchemy import create_engine, text
-
+import os
 #engine = create_engine("mariadb+pymysql://user:pass@some_mariadb/dbname?charset=utf8mb4")
 
-conn_string = "mysql+pymysql://0ms0pp77tssls7xg2bp0:pscale_pw_VAj893PyINRtPzZSW4wbDKHAkGrgVxOrvr5MY39Ki6A@ap-south.connect.psdb.cloud/careers?charset=utf8mb4"
+conn_string = os.environ['DB_CONN_STRING']
 engine = create_engine(conn_string,
                        connect_args={"ssl": {
                          "ssl_ca": "/etc/ssl/cert.pem"

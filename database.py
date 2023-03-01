@@ -18,3 +18,16 @@ def load_jobs():
       result_dict_list.append(row._mapping)
 
   return result_dict_list
+
+
+def load_job_from_id(id):
+  print("inside load jobs from id", id)
+  with engine.connect() as conn:
+    sql_stmt = f'''select * from jobs where id = {id}'''
+    result = conn.execute(text(sql_stmt))
+    rows = result.all()
+    print("rows", rows)
+    if len(rows) == 0:
+      return None
+    else:
+      return rows[0]

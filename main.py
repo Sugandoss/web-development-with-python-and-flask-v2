@@ -1,5 +1,5 @@
 from flask import Flask, render_template, jsonify
-from database import load_jobs
+from database import load_jobs, load_job_from_id
 
 app = Flask(__name__)
 
@@ -37,7 +37,19 @@ def jovian_careers():
 # If we want a json or api format, we can use jsonify
 @app.route('/api/openpositions')
 def json_format_jovian_careers():
-  return jsonify(load_jobs())
+  jobs = load_jobs()
+  return jsonify(jobs)
+
+
+#Here, <id> takes the id from the browser as the user request
+@app.route("/job/<id>")
+def show_jobs(id):
+  print("id in show jobs", id)
+  # return jsonify(load_job_from_id(id))
+  jobs = load_job_from_id(id)
+  if not jobs:
+    return "Not Found", 404
+  return render_template("jobpage.html", job=jobs)
 
 
 if __name__ == '__main__':

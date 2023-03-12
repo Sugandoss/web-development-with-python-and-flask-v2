@@ -31,3 +31,18 @@ def load_job_from_id(id):
       return None
     else:
       return rows[0]
+
+def store_form_in_db(job_id, data):
+  with engine.connect() as conn:
+    sql_stmt= f'''insert into applications(job_id, full_name, email, linkedin_url, education, work_experience, resume_url) values({job_id}, '{data['full_name']}', '{data['email']}', '{data['url']}', '{data['education']}',  '{data['work_experience']}', '{data['resumeurl']}' )'''
+    #print(sql_stmt)
+    conn.execute(text(sql_stmt))
+      
+    # conn.execute(sql_stmt, job_id=job_id,
+    #              full_name=data['full_name'],
+    #              email=data['email'],
+    #              linkedin_url=data['url'],
+    #              education=data['education'],
+    #              work_experience=data['work_experience'],
+    #              resume_url=data['resumeurl'])
+  

@@ -1,5 +1,5 @@
-from flask import Flask, render_template, jsonify
-from database import load_jobs, load_job_from_id
+from flask import Flask, render_template, jsonify, request
+from database import load_jobs, load_job_from_id, store_form_in_db
 
 app = Flask(__name__)
 
@@ -44,13 +44,31 @@ def json_format_jovian_careers():
 #Here, <id> takes the id from the browser as the user request
 @app.route("/job/<id>")
 def show_jobs(id):
-  print("id in show jobs", id)
+
   # return jsonify(load_job_from_id(id))
   jobs = load_job_from_id(id)
   if not jobs:
     return "Not Found", 404
   return render_template("jobpage.html", job=jobs)
 
+@app.route("/api/job/<id>")
+def show_json_format_job(id):
+  jobs = load_job_from_id(id)
+  return jsonify(jobs)
+
+  
+@app.route("/job/<id>/apply", methods=['post'])
+def show_form(id):
+  #Get all the arguments after `?` from the browser url after submitting the form
+  #data = request.args
+  #request.form is being used when we use methods=['post']
+  data = request.form
+  jobs = load_job_from_id(id)
+  store_form_in_db(id, data)
+  return render_template("application_submitted.html",
+                         application=data,
+                         job=jobs)
+  #return jsonify(data)
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', debug=True)
